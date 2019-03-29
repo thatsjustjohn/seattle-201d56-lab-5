@@ -48,6 +48,7 @@ Test this function by hand in the console to get it working, and when you think 
 
 // Write your code here
 function sumAndMultiply(a, b, c) { //eslint-disable-line
+  //sum(a,b)[0] would return the sum of the 2 numbers ignoring the 
   return [sum(a,sum(b,c)[0])[0], multiply(a,multiply(b,c)[0])[0],
     `${a} and ${b} and ${c} sum to ${sum(a,sum(b,c)[0])[0]}.`,
     `The product of ${a} and ${b} and ${c} is ${multiply(a,multiply(b,c)[0])[0]}.`];
@@ -72,12 +73,26 @@ Test this function by hand in the console to get it working, and when you think 
 var testArray = [2, 3, 4]; //eslint-disable-line
 
 function sumArray(sumArr) { //eslint-disable-line
+  //variable to keep running sum
+  let runningSum = 0;
+  //variable to hold the string
+  let sumArrayString = '';
+  let firstPass = true;
+  //loop for the sum and string
+  for (var num in sumArr){
+    runningSum = sum(runningSum, sumArr[num])[0];
+    //logic to handle commas
+    sumArrayString += (firstPass ? '' : ',') + sumArr[num];
+    if(firstPass === true) firstPass = false;
+  }
 
+  sumArrayString += ` was passed in as an array of numbers, and ${runningSum} is their sum.`;
+  return [runningSum, sumArrayString];
 }
 
 // Here is the test for sumArray(); uncomment it to run it
 
-// testSumArray(testArray);
+testSumArray(testArray);
 
 // Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. Don't forget to create a new branch for your work on the next question!
 
