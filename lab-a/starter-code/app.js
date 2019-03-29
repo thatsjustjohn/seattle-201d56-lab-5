@@ -108,11 +108,25 @@ Test this function by hand in the console to get it working, and when you think 
 
 // Write your code here
 function multiplyArray(multArr) { //eslint-disable-line
+  //variable to keep running sum
+  let runningProduct = 1;
+  //variable to hold the string
+  let productArrayString = 'The numbers ';
+  let firstPass = true;
+  //loop for the sum and string
+  for (var num in multArr){
+    runningProduct = multiply(runningProduct, multArr[num])[0];
+    //logic to handle commas
+    productArrayString += (firstPass ? '' : ',') + multArr[num];
+    if(firstPass === true) firstPass = false;
+  }
 
+  productArrayString += ` have a product of ${runningProduct}.`;
+  return [runningProduct, productArrayString];
 }
 
 // Here is the test for multiplyArray(); uncomment it to run it
-// testMultiplyArray(testArray);
+testMultiplyArray(testArray);
 
 // Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop.
 
